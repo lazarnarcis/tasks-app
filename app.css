@@ -1,0 +1,18 @@
+#task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    background: black;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 0;
+}
+
+#deleteTask {
+    cursor: pointer;
+}
