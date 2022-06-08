@@ -3,6 +3,10 @@ let tasks = localStorage.getItem("tasks") || [];
 
 if (tasks.length != 0) tasks = JSON.parse(tasks);
 
+document.querySelector("#addTask").addEventListener("keyup", (e) => {
+    if (e.key == "Enter") addTasks();
+});
+
 function showTasks () {
     divTasks.innerHTML = "";
     for (let i = 0; i < tasks.length; i++) {
@@ -37,6 +41,7 @@ showTasks();
 function addTasks () {
     let input = document.querySelector("#addTask");
     let inputValue = input.value;
+    if (inputValue == "") return;
     tasks = [inputValue, ...tasks];
     localStorage.setItem("tasks", JSON.stringify(tasks));
     showTasks();
