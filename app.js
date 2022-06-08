@@ -1,5 +1,7 @@
 let divTasks = document.querySelector("#tasks");
-let tasks = [];
+let tasks = localStorage.getItem("tasks") || [];
+
+if (tasks.length != 0) tasks = JSON.parse(tasks);
 
 function showTasks () {
     divTasks.innerHTML = "";
@@ -10,32 +12,33 @@ function showTasks () {
         divTasks.appendChild(divTask);
         let h1TaskName = document.createElement("h1");
         h1TaskName.id = "taskName";
-        h1TaskName.innerHTML = tasks[i].name;
+        h1TaskName.innerHTML = tasks[i];
         divTask.appendChild(h1TaskName); 
         let h1DeleteTask = document.createElement("h1");
         h1DeleteTask.id = "deleteTask";
         h1DeleteTask.innerHTML = "x";
         h1DeleteTask.addEventListener("click", () => {
             tasks.splice(tasks.indexOf(tasks[i]), 1);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
             showTasks();
         });
         h1DeleteTask.addEventListener("mouseenter", () => {
-            document.querySelector(".task" + tasks[i]).style.backgroundColor = "red";
+            divTask.style.backgroundColor = "red";
         });
         h1DeleteTask.addEventListener("mouseleave", () => {
-            document.querySelector(".task" + tasks[i]).style.backgroundColor = "black";
+            divTask.style.backgroundColor = "black";
         });
         divTask.appendChild(h1DeleteTask); 
     }
 }
 
+showTasks();
+
 function addTasks () {
     let input = document.querySelector("#addTask");
     let inputValue = input.value;
-    let task = {
-        name: inputValue
-    };
-    tasks = [task, ...tasks];
+    tasks = [inputValue, ...tasks];
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     showTasks();
     input.value = '';
 }

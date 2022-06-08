@@ -5,8 +5,9 @@
     
     background: black;
     color: white;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 7.5px;
+    margin: 7.5px;
 }
 
 h1 {
